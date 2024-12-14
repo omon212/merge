@@ -1,1 +1,1 @@
-Bu detached branch uchun fayl.
+Bu main branch uchun fayl.

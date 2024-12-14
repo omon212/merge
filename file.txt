@@ -11,3 +11,4 @@ branch2 - commit 2
 Detached commit 1
 Detached commit 2
 Detached commit 3
+Detached commit 4

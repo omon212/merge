@@ -3,3 +3,4 @@ Bu main branch uchun fayl.
 =======
 Bu detached branch uchun fayl.
 >>>>>>> detached
+Branch auto-branch-1 commit

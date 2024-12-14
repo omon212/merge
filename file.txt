@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 Bu main branch uchun fayl.
+=======
+Bu detached branch uchun fayl.
+>>>>>>> detached

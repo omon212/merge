@@ -1,34 +1,49 @@
 import os
 
-# 100 ta branch yaratib merge qilish uchun funksiya
-def automated_commits():
-    # main branchga o'tish
-    os.system("git checkout main")
+# Konfiguratsiya
+MAIN_BRANCH = "main"
+DETACHED_BRANCH = "detached"
+FILE_NAME = "file.txt"
 
-    for i in range(1, 101):  # 100 ta branch loop
-        branch_name = f"auto-branch-{i}"
+# Git komandalarini bajaruvchi funksiya
+def run_command(command):
+    print(f"Running: {command}")
+    os.system(command)
 
-        # Yangi branch yaratish
-        os.system(f"git checkout -b {branch_name}")
+# 1. Main branchdagi o'zgarishlarni olish va fayl yaratish
+print("\n--- Switching to main branch ---")
+run_command(f"git checkout {MAIN_BRANCH}")
+run_command(f"git pull origin {MAIN_BRANCH}")
 
-        # Faylga o'zgartirish kiritish
-        with open("file.txt", "a") as file:
-            file.write(f"Branch {branch_name} commit\n")
+print("Creating and writing to file in main branch...")
+with open(FILE_NAME, "w") as f:
+    f.write("Bu main branch uchun fayl.\n")
 
-        # Commit qilish
-        os.system("git add file.txt")
-        os.system(f"git commit -m 'Commit from {branch_name}'")
+run_command(f"git add {FILE_NAME}")
+run_command(f'git commit -m "Main branch: {FILE_NAME} yaratildi va to\'ldirildi"')
+run_command(f"git push origin {MAIN_BRANCH}")
 
-        # main branchga qaytib merge qilish
-        os.system("git checkout main")
-        os.system(f"git merge --no-ff {branch_name} -m 'Merge {branch_name} into main'")
+# 2. Detached branchdagi o'zgarishlarni olish va fayl yaratish
+print("\n--- Switching to detached branch ---")
+run_command(f"git checkout {DETACHED_BRANCH}")
+run_command(f"git pull origin {DETACHED_BRANCH}")
 
-        # Branchni o'chirib yuborish (ixtiyoriy)
-        os.system(f"git branch -d {branch_name}")
+print("Creating and writing to file in detached branch...")
+with open(FILE_NAME, "w") as f:
+    f.write("Bu detached branch uchun fayl.\n")
 
-    # Oxirgi commitlarni remote repositoryga push qilish
-    os.system("git push origin main")
+run_command(f"git add {FILE_NAME}")
+run_command(f'git commit -m "Detached branch: {FILE_NAME} yaratildi va to\'ldirildi"')
+run_command(f"git push origin {DETACHED_BRANCH}")
 
-if __name__ == "__main__":
-    automated_commits()
+# 3. Main branchga qaytish va merge qilish
+print("\n--- Merging detached branch into main branch ---")
+run_command(f"git checkout {MAIN_BRANCH}")
+run_command(f"git merge {DETACHED_BRANCH}")
+
+# Merge natijasini push qilish
+print("Pushing merged changes to main branch...")
+run_command(f"git push origin {MAIN_BRANCH}")
+
+print("\nDone! File created and merged successfully.")
 

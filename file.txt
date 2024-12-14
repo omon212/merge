@@ -5,3 +5,4 @@ branch2 - commit 2
 branch1 - commit 0
 branch2 - commit 0
 branch1 - commit 0
+branch2 - commit 0

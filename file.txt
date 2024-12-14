@@ -5,3 +5,4 @@ Bu detached branch uchun fayl.
 >>>>>>> detached
 Branch auto-branch-1 commit
 Branch auto-branch-2 commit
+Branch auto-branch-3 commit
